@@ -4,6 +4,7 @@ import React from 'react';
 import Homepage from '../screens/Homepage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Detail from '../screens/Detail';
+import DetailNavigator from './DetailNavigator';
 
 const bottomTab = createBottomTabNavigator();
 
@@ -43,8 +44,8 @@ const BottomNavigator = () => {
         }}
       />
       <bottomTab.Screen
-        name="detail"
-        component={Detail}
+        name="detailstack"
+        component={DetailNavigator}
         options={{
           // tabBarIcon: ({ color, size }) => (
           //     // <Ionicons name="home" size={size} color={color} />

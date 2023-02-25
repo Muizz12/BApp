@@ -12,6 +12,8 @@ const schema = yup
   .object({
     emailAddress: yup.string().email().required('Please Enter Your Email'),
     password: yup.string().required('Please Enter the Password'),
+    name: yup.string().required('Please Enter Your Name'),
+    address: yup.string().required('Please Enter the Address'),
   })
   .required();
 
@@ -20,7 +22,7 @@ interface CredentialFormValue {
   title: string;
 }
 
-const CredentialForm = ({submit, title}: CredentialFormValue) => {
+const SignUpForm = ({submit, title}: CredentialFormValue) => {
   const {
     control,
     register,
@@ -64,6 +66,42 @@ const CredentialForm = ({submit, title}: CredentialFormValue) => {
       />
       <ErrorText title={errors.password?.message} />
 
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            placeholder="Email Name"
+            autoCapitalize="none"
+            selectTextOnFocus={false}
+            onChangeText={inputValue => onChange(inputValue)}
+            style={{backgroundColor: 'transparent'}}
+          />
+        )}
+        name="name"
+      />
+      <ErrorText title={errors.name?.message} />
+
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            placeholder="Email Address"
+            autoCapitalize="none"
+            selectTextOnFocus={false}
+            onChangeText={inputValue => onChange(inputValue)}
+            style={{backgroundColor: 'transparent'}}
+          />
+        )}
+        name="address"
+      />
+      <ErrorText title={errors.address?.message} />
+
       <View style={{marginTop: 20}}>
         <PrimaryButtons title={title} onpress={handleSubmit(submit)} />
       </View>
@@ -71,6 +109,6 @@ const CredentialForm = ({submit, title}: CredentialFormValue) => {
   );
 };
 
-export default CredentialForm;
+export default SignUpForm;
 
 const styles = StyleSheet.create({});
