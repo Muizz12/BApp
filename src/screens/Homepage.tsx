@@ -6,11 +6,14 @@ import {PrimaryButtons} from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {userToken} from '../GraphQl/variables';
 import {useNavigation} from '@react-navigation/native';
+import {GoogleSignin} from 'react-native-google-signin';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Homepage = () => {
   const navigation = useNavigation();
   const logout = async () => {
     try {
+      await GoogleSignin.signOut();
       await AsyncStorage.removeItem('token');
       userToken(null);
     } catch (e) {
@@ -23,31 +26,47 @@ const Homepage = () => {
       id: 1,
       name: 'Shoes',
       image:
-        'https://i.pinimg.com/736x/03/08/34/030834f7223ebfd68a5b7a0749b1659e.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZIPKnRo0EDDY_o1AfOcHLy-18DJxjDV0JkX6e3mbM&s',
+      iconName: 'foot',
+      height: '70%',
+      width: '100%',
     },
     {
       id: 2,
       name: 'Clothes',
       image:
-        'https://media.istockphoto.com/id/621499082/photo/man-standing-in-street-wearing-denim-portrait.jpg?s=612x612&w=0&k=20&c=4anD9Gp9ZxxMS4aaGbCQNsGRQ0GDtOdtFVI3aeD9RMY=',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWwVU5IMHuRheJzCfr7dR-rW2yitN21BZxkQ&usqp=CAU',
+      height: '75%',
+      width: '50%',
     },
     {
       id: 3,
-      name: 'Food',
+      name: 'Stationary',
       image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXMzBWyEwv3eXT-8wqY4CzCtSisuxQRabr-g&usqp=CAU',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdjeF63ZxFwtEGuAYh6Dgh_lNWx6H74iU5HA&usqp=CAU',
+      height: '70%',
+      width: '30%',
     },
     {
       id: 4,
-      name: 'Water',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXMzBWyEwv3eXT-8wqY4CzCtSisuxQRabr-g&usqp=CAU',
+      name: 'Furniture',
+      image: 'https://cdn-icons-png.flaticon.com/512/2607/2607259.png',
+      height: '70%',
+      width: '40%',
     },
     {
       id: 5,
-      name: 'Tents',
-      image:
-        'https://cdn.thewirecutter.com/wp-content/media/2022/07/carfamilycampingtents-2048px-0313-3x2-1.jpg',
+      name: 'Electronics',
+      image: 'https://static.thenounproject.com/png/4474852-200.png',
+      height: '70%',
+      width: '40%',
+    },
+    {
+      id: 6,
+      name: 'Personal Care',
+      image: 'https://cdn-icons-png.flaticon.com/512/2025/2025510.png',
+      height: '70%',
+      width: '30%',
     },
   ];
   const gotoDetail = (title: string) => {
@@ -64,23 +83,26 @@ const Homepage = () => {
     <SafeAreaView
       style={{
         backgroundColor: 'white',
-        alignItems: 'center',
-        marginVertical: 20,
         flex: 1,
       }}>
-      <FlatList
-        data={data}
-        renderItem={({item}) => (
-          <ProductComponent
-            title={item.name}
-            image={item.image}
-            gotoDetail={gotoDetail}
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
-      <View style={{paddingVertical: 5}}>
+      <View style={{paddingHorizontal: 40}}>
         <PrimaryButtons title="Logout" onpress={logout} />
+      </View>
+      <View style={{paddingHorizontal: 20, marginVertical: 10}}>
+        <FlatList
+          data={data}
+          renderItem={({item}) => (
+            <ProductComponent
+              title={item.name}
+              image={item.image}
+              iconName={item.iconName}
+              gotoDetail={gotoDetail}
+              height={item.height}
+              width={item.width}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
       </View>
     </SafeAreaView>
   );

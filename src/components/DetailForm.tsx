@@ -18,7 +18,7 @@ const schema = yup
     model: yup.string().required('Please enter the model'),
     quantity: yup.string().required('Please  enter the quantity'),
     date: yup.string().required('Please  enter the  Date'),
-    amount: yup.string().required('Please  enter the amount '),
+    amount: yup.string().required('Please  enter the address '),
   })
   .required();
 
@@ -159,7 +159,7 @@ const DetailForm = ({submit, name}: CredentialFormValue) => {
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            placeholder="Enter Total Amount"
+            placeholder="Enter Your Address"
             value={value}
             onChangeText={inputValue => onChange(inputValue)}
           />

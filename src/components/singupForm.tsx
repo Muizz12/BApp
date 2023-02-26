@@ -13,7 +13,7 @@ const schema = yup
     emailAddress: yup.string().email().required('Please Enter Your Email'),
     password: yup.string().required('Please Enter the Password'),
     name: yup.string().required('Please Enter Your Name'),
-    address: yup.string().required('Please Enter the Address'),
+    address: yup.string().required('Please Enter the Number'),
   })
   .required();
 
@@ -91,7 +91,7 @@ const SignUpForm = ({submit, title}: CredentialFormValue) => {
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            placeholder="Email Address"
+            placeholder="Enter you phone number"
             autoCapitalize="none"
             selectTextOnFocus={false}
             onChangeText={inputValue => onChange(inputValue)}

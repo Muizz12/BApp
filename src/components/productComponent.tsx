@@ -7,11 +7,17 @@ interface ProductComponentProps {
   image?: string | undefined;
   title: string;
   gotoDetail: (title: string) => void;
+  iconName?: string;
+  height?: string;
+  width?: string;
 }
 const ProductComponent = ({
   image,
   title,
+  iconName,
   gotoDetail,
+  width,
+  height,
 }: ProductComponentProps) => {
   const navigation = useNavigation();
   console.log('image====>', typeof image);
@@ -19,27 +25,47 @@ const ProductComponent = ({
     throw new Error('Invalid image path');
   }
   return (
-    <TouchableOpacity style={{width: '100%'}} onPress={() => gotoDetail(title)}>
+    <TouchableOpacity
+      style={{
+        margin: 20,
+        maxHeight: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 40,
+        backgroundColor: 'white',
+        borderRadius: 30,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 6,
+        },
+        shadowOpacity: 0.39,
+        shadowRadius: 8.3,
+
+        elevation: 13,
+      }}
+      onPress={() => gotoDetail(title)}>
       <Image
         source={{
           uri: image,
         }}
         style={{
-          ...styles.imageStyle,
+          width: width,
+          height: height,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '5%',
+          paddingBottom: '10%',
         }}
       />
-      <VenueName title={title} />
+
+      <View style={{marginTop: 10, marginBottom: 10}}>
+        <VenueName title={title} />
+      </View>
     </TouchableOpacity>
   );
 };
 
 export default ProductComponent;
 
-const styles = StyleSheet.create({
-  imageStyle: {
-    width: 400,
-    height: 325,
-    zIndex: -1,
-    marginVertical: 20,
-  },
-});
+const styles = StyleSheet.create({});

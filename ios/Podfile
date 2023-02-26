@@ -18,7 +18,8 @@ target 'App' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
   target 'AppTests' do
     inherit! :complete
     # Pods for testing
@@ -28,7 +29,7 @@ target 'App' do
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+#  use_flipper!()
 
   post_install do |installer|
     react_native_post_install(installer)
